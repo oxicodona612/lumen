@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="18 18 72 72">
+  <!-- Lumen app icon. A 2x2 photo grid where one tile has become light;
+       the dimmed lower-left tile is the hidden photo. Same geometry as
+       app/src/main/res/drawable/ic_launcher_*.xml, cropped to the visible zone. -->
+  <defs>
+    <clipPath id="squircle"><rect x="18" y="18" width="72" height="72" rx="16.2"/></clipPath>
+    <linearGradient id="field" x1="0" y1="0" x2="108" y2="108" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#29243F"/>
+      <stop offset="0.55" stop-color="#131120"/>
+      <stop offset="1" stop-color="#07060C"/>
+    </linearGradient>
+    <radialGradient id="bloom" cx="66" cy="42" r="46" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF8A4C" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#FF8A4C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="65" cy="43" r="16" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF8A4C" stop-opacity="0.4"/>
+      <stop offset="0.55" stop-color="#FF6A55" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#FF3D7F" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sun" x1="58" y1="35" x2="72" y2="51" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFD073"/>
+      <stop offset="0.5" stop-color="#FF7A45"/>
+      <stop offset="1" stop-color="#FF3D7F"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#squircle)">
+    <rect x="0" y="0" width="108" height="108" fill="url(#field)"/>
+    <rect x="0" y="0" width="108" height="108" fill="url(#bloom)"/>
+    <circle cx="65" cy="43" r="16" fill="url(#halo)"/>
+    <rect x="34" y="34" width="18" height="18" rx="5" fill="#FFFFFF"/>
+    <rect x="34" y="56" width="18" height="18" rx="5" fill="#FFFFFF" fill-opacity="0.35"/>
+    <rect x="56" y="56" width="18" height="18" rx="5" fill="#FFFFFF"/>
+    <circle cx="65" cy="43" r="9" fill="url(#sun)"/>
+  </g>
+</svg>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The Lumen mark: a 2x2 photo grid where one tile has become light.
+     The dimmed lower-left tile is the hidden photo. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- halo -->
+    <path android:pathData="M49,43a16,16 0,1 0,32 0a16,16 0,1 0,-32 0z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="radial"
+                android:centerX="65"
+                android:centerY="43"
+                android:gradientRadius="16">
+                <item android:offset="0" android:color="#66FF8A4C" />
+                <item android:offset="0.55" android:color="#22FF6A55" />
+                <item android:offset="1" android:color="#00FF3D7F" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- top-left tile -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M39,34H47A5,5 0,0 1,52 39V47A5,5 0,0 1,47 52H39A5,5 0,0 1,34 47V39A5,5 0,0 1,39 34Z" />
+
+    <!-- bottom-left tile: hidden -->
+    <path
+        android:fillColor="#59FFFFFF"
+        android:pathData="M39,56H47A5,5 0,0 1,52 61V69A5,5 0,0 1,47 74H39A5,5 0,0 1,34 69V61A5,5 0,0 1,39 56Z" />
+
+    <!-- bottom-right tile -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M61,56H69A5,5 0,0 1,74 61V69A5,5 0,0 1,69 74H61A5,5 0,0 1,56 69V61A5,5 0,0 1,61 56Z" />
+
+    <!-- the sun -->
+    <path android:pathData="M56,43a9,9 0,1 0,18 0a9,9 0,1 0,-18 0z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="58"
+                android:startY="35"
+                android:endX="72"
+                android:endY="51">
+                <item android:offset="0" android:color="#FFFFD073" />
+                <item android:offset="0.5" android:color="#FFFF7A45" />
+                <item android:offset="1" android:color="#FFFF3D7F" />
+            </gradient>
+        </aapt:attr>
+    </path>
+</vector>

@@ -1,0 +1,10 @@
+* text=auto
+
+# gradlew must keep LF or it won't run on macOS/Linux/CI; the .bat wants CRLF.
+gradlew text eol=lf
+*.bat text eol=crlf
+
+*.jar binary
+*.ttf binary
+*.png binary
+*.apk binary

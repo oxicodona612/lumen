@@ -1,0 +1,30 @@
+# Gradle / Kotlin
+.gradle/
+.kotlin/
+build/
+
+# Machine-specific SDK path
+local.properties
+
+# Build outputs (attach APKs to releases instead)
+*.apk
+*.aab
+*.ap_
+*.dex
+captures/
+output-metadata.json
+
+# Signing
+*.jks
+*.keystore
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.cxx/
+.externalNativeBuild/
+
+# OS
+.DS_Store
+Thumbs.db
