@@ -91,4 +91,4 @@ Kotlin · Jetpack Compose · AGP 9.4 · Coil 3 · [Telephoto](https://github.com
 
 - [Inter](https://github.com/rsms/inter) typeface — SIL Open Font License 1.1 ([licenses/Inter-OFL.txt](licenses/Inter-OFL.txt)).
 - Icon glyphs adapted from Material Icons (Apache 2.0).
-- Screenshot photos are placeholder images from [Lorem Picsum](https://picsum.photos) (Unsplash).
+- Screenshot photos are placeholder images from https://picsum.photos (Unsplash).
