@@ -80,8 +80,6 @@ import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.memory.MemoryCache
 import coil3.request.ImageRequest
-import dev.chrisbanes.haze.hazeSource
-import dev.chrisbanes.haze.rememberHazeState
 import kotlinx.coroutines.launch
 import me.saket.telephoto.zoomable.ZoomSpec
 import me.saket.telephoto.zoomable.coil3.ZoomableAsyncImage
@@ -143,7 +141,6 @@ fun ViewerOverlay(
     val set = request.source.actionSet
     val scope = rememberCoroutineScope()
     val density = LocalDensity.current
-    val haze = rememberHazeState()
     val latestItems by rememberUpdatedState(items)
 
     BoxWithConstraints(Modifier.fillMaxSize()) {
@@ -165,11 +162,6 @@ fun ViewerOverlay(
 
         val current = items.getOrNull(pager.currentPage.coerceAtMost(items.lastIndex))
         LaunchedEffect(current?.key) { onCurrentKey(current?.key) }
-
-        // Live blur can't sample TextureView video frames — on device it renders a torn
-        // noise strip through the bar. Bars go solid whenever a video is on or next to screen.
-        val videoNear = (pager.currentPage - 1..pager.currentPage + 1).any { items.getOrNull(it)?.isVideo == true }
-        val barHaze = if (videoNear) null else haze
         LaunchedEffect(items.isEmpty()) {
             if (items.isEmpty() && phase == Phase.Shown) {
                 onCurrentKey(null)
@@ -261,7 +253,6 @@ fun ViewerOverlay(
             modifier = Modifier
                 .fillMaxSize()
                 .graphicsLayer { alpha = if (phase == Phase.Shown) 1f else 0f }
-                .hazeSource(haze)
                 .pointerInput(Unit) {
                     val tracker = VelocityTracker()
                     awaitEachGesture {
@@ -350,6 +341,9 @@ fun ViewerOverlay(
         }
 
         // ---- chrome ----------------------------------------------------------------------
+        // Solid frosted fills, no live blur: Haze sampling this pager tears into a noise
+        // strip on real Pixel GPUs (never on the emulator). Behind these bars is mostly
+        // letterbox black anyway, so the blur bought almost nothing.
         AnimatedVisibility(
             visible = showChrome,
             enter = fadeIn(tween(160)),
@@ -363,7 +357,7 @@ fun ViewerOverlay(
                     .padding(horizontal = 12.dp, vertical = 6.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                GlassCircleButton(LumenIcons.Back, barHaze, contentDescription = "Close", onClick = close)
+                GlassCircleButton(LumenIcons.Back, null, contentDescription = "Close", onClick = close)
                 Column(
                     Modifier
                         .weight(1f)
@@ -389,7 +383,7 @@ fun ViewerOverlay(
             exit = fadeOut(tween(140)) + slideOutVertically { it / 3 },
             modifier = Modifier.align(Alignment.BottomCenter),
         ) {
-            current?.let { InfoCard(it, set, barHaze) }
+            current?.let { InfoCard(it, set) }
         }
 
         AnimatedVisibility(
@@ -405,7 +399,7 @@ fun ViewerOverlay(
                     .padding(horizontal = 20.dp, vertical = 12.dp)
                     .fillMaxWidth()
                     .height(58.dp)
-                    .glass(barHaze, CircleShape)
+                    .glass(null, CircleShape)
                     .padding(horizontal = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly,
@@ -506,14 +500,14 @@ private fun TransitionImage(item: MediaItem, thumb: Rect?, full: Rect, progress:
 }
 
 @Composable
-private fun InfoCard(item: MediaItem, set: ActionSet, haze: dev.chrisbanes.haze.HazeState?) {
+private fun InfoCard(item: MediaItem, set: ActionSet) {
     val context = LocalContext.current
     Column(
         Modifier
             .windowInsetsPadding(WindowInsets.navigationBarsIgnoringVisibility)
             .padding(start = 20.dp, end = 20.dp, bottom = 84.dp)
             .fillMaxWidth()
-            .glass(haze, RoundedCornerShape(24.dp))
+            .glass(null, RoundedCornerShape(24.dp))
             .padding(18.dp),
     ) {
         val zone = Instant.ofEpochMilli(item.dateTaken).atZone(ZoneId.systemDefault())
