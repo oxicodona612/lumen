@@ -263,6 +263,15 @@ fun GridScreen(
                 .hazeBlur(input = HazeInput.Sources(haze), style = BottomEdgeStyle),
         )
 
+        FastScroller(
+            state = state,
+            items = items,
+            columns = columns,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(top = topPad + 4.dp, bottom = bottomPad + 8.dp),
+        )
+
         AnimatedVisibility(
             visible = selecting,
             enter = fadeIn() + slideInVertically { it / 2 },
